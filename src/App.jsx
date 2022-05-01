@@ -1,10 +1,13 @@
 import "./App.css";
+import ListOfToDo from "./components/ListOfToDo";
+import StoreProvider from "./components/StoreProvider";
 
 function App() {
   return (
-    <div className="App">
+    <StoreProvider>
       <h1>Hello from my App</h1>
-    </div>
+      <ListOfToDo />
+    </StoreProvider>
   );
 }
 
