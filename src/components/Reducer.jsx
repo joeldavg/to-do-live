@@ -8,13 +8,8 @@ function Reducer(state, action) {
 
       return stateWithAllNotes;
     case "add-note":
-      const newNote = {
-        id: Math.floor(Math.random() * 100),
-        message: action.payload.message,
-        title: action.payload.title,
-        done: false,
-      };
-
+      const newNote = action.payload;
+      console.log(newNote);
       const newListOfNotesAddedOne = [...state.listOfNotes, newNote];
 
       const newStateAddNote = {
@@ -36,15 +31,16 @@ function Reducer(state, action) {
       return newStateWithNoteDeleted;
     case "update-note":
       const updatedNote = action.payload;
-      const newListOfNotes = state.listOfNotes.filter(
-        (note) => note.id !== updatedNote.id
-      );
-
-      const newListOfNotesWithModification = [...newListOfNotes, updatedNote];
+      const newListOfNotes = state.listOfNotes.map((note) => {
+        if (note.id === updatedNote.id) {
+          return updatedNote;
+        }
+        return note;
+      });
 
       const newStateModifiedCheckbox = {
         ...state,
-        listOfNotes: newListOfNotesWithModification,
+        listOfNotes: newListOfNotes,
       };
 
       return newStateModifiedCheckbox;

@@ -6,15 +6,24 @@ const Form = () => {
 
   const formRef = useRef(null);
 
-  const onAdd = (event) => {
+  const onAdd = async (event) => {
     event.preventDefault();
     if (title && message) {
+      const noteFromForm = {
+        title,
+        message,
+        done: false,
+      };
+
+      let noteSaved = await fetch(`http://localhost:8081/api/save/note`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(noteFromForm),
+      });
+
       dispatch({
         type: "add-note",
-        payload: {
-          title,
-          message,
-        },
+        payload: await noteSaved.json(),
       });
 
       formRef.current.reset();
