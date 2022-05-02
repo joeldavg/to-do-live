@@ -17,7 +17,16 @@ function Reducer(state, action) {
 
       return newStateAddNote;
     case "remove-note":
-      return state;
+      const deletedNote = action.payload;
+      const newListOfNoteWithoutPayloadNote = state.listOfNotes.filter(
+        (note) => note.id !== deletedNote.id
+      );
+      const newStateWithNoteDeleted = {
+        ...state,
+        listOfNotes: newListOfNoteWithoutPayloadNote,
+      };
+
+      return newStateWithNoteDeleted;
     case "update-note":
       const updatedNote = action.payload;
       const newListOfNotes = state.listOfNotes.filter(
@@ -31,7 +40,6 @@ function Reducer(state, action) {
         listOfNotes: newListOfNotesWithModification,
       };
 
-      // console.log(newListOfNotes);
       return newStateModifiedCheckbox;
   }
 }
