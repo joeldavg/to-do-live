@@ -15,6 +15,18 @@ const initialState = {
       message: "Message by default",
       done: true,
     },
+    {
+      id: "1",
+      title: "First Note",
+      message: "First Message",
+      done: true,
+    },
+    {
+      id: "2",
+      title: "Second Note",
+      message: "Second Message",
+      done: true,
+    },
   ],
 };
 

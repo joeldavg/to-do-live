@@ -1,7 +1,6 @@
 function Reducer(state, action) {
   switch (action.type) {
     case "add-note":
-      console.log("adding note");
       const newNote = {
         id: Math.floor(Math.random() * 100),
         message: action.payload.message,
@@ -20,7 +19,20 @@ function Reducer(state, action) {
     case "remove-note":
       return state;
     case "update-note":
-      return state;
+      const updatedNote = action.payload;
+      const newListOfNotes = state.listOfNotes.filter(
+        (note) => note.id !== updatedNote.id
+      );
+
+      const newListOfNotesWithModification = [...newListOfNotes, updatedNote];
+
+      const newStateModifiedCheckbox = {
+        ...state,
+        listOfNotes: newListOfNotesWithModification,
+      };
+
+      // console.log(newListOfNotes);
+      return newStateModifiedCheckbox;
   }
 }
 
